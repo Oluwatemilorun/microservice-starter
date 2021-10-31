@@ -1,0 +1,6 @@
+node_modules
+dist
+logs/
+production.env
+staging.env
+generated

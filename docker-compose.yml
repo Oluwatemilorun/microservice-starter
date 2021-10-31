@@ -1,0 +1,27 @@
+version: "3"
+services:
+  app:
+    build:
+      context: "."
+      dockerfile: "./app/Dockerfile"
+    depends_on:
+      - app-db
+    ports:
+      - 5000:5000
+    volumes:
+      - ./app:/opt/app
+
+  app-db:
+    image: mysql:5.7.20
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    ports:
+      - 7200:7200
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 7300:80
+    volumes:
+      - ./phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
