@@ -3,6 +3,20 @@ import { Controller, Param, Body, Get, Post, Put, Delete } from 'routing-control
 
 @Controller('/user')
 class UserController {
+	/**
+	 * @swagger
+	 * /user:
+	 *   post:
+	 *     description: Create a new user
+	 *     operationId: createUser
+	 *     produces:
+	 *       - application/json
+	 *     responses:
+	 *       200:
+	 *         description: User model
+	 *         schema:
+	 *           $ref: '#/definitions/User'
+	 */
 	@Post()
 	create(@Body() user: User) {
 		// ===

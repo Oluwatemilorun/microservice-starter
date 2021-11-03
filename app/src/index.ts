@@ -9,13 +9,19 @@ import app from '@server';
 // Connect to DB
 db.init()
 	.then(() => {
-		logger.info('Connection to DB successful');
-
 		// Start the server
 		const port = Number(PORT);
 
 		app.listen(port, () => {
-			logger.info(`${APP_NAME} server started on port: ${PORT}`);
+			logger.info(`
+			------------
+			${APP_NAME} Server Started!
+
+			URL: http://localhost:${port}
+			Health: http://localhost:${port}/health
+			API Doc: http://localhost:${port}/api-docs
+			------------
+			`);
 		});
 	})
 	.catch((err) => {

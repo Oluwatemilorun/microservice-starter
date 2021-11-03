@@ -9,8 +9,10 @@ import express, { Request, Response, NextFunction } from 'express';
 import { SERVICE_UNAVAILABLE, NOT_FOUND } from 'http-status-codes';
 
 import logger from '@shared/logger';
+import SetupSwagger from '@shared/swagger';
 import SetupV1Router from '@routes/v1';
 import { COOKIE_SECRET } from '@config';
+import { APP_NAME } from '@shared/constants';
 
 // Init express
 const app = express();
@@ -36,6 +38,13 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.NODE_ENV === 'production') {
 	app.use(helmet());
 }
+
+// Setup Swagger doc
+SetupSwagger(app, {
+	name: APP_NAME,
+	description: '',
+	version: '0.1',
+});
 
 // Add APIs
 SetupV1Router(app);
