@@ -2,6 +2,7 @@
 	"name": "microservice-starter",
 	"version": "0.0.1",
 	"scripts": {
+		"db:migrate": "scripts/migration.sh",
 		"build": "rm -rf ./dist && tsc --build tsconfig.prod.json",
 		"start": "node -r module-alias/register ./dist",
 		"start:dev": "nodemon --config nodemon.json",

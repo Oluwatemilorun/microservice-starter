@@ -12,6 +12,9 @@ export class DB {
 		this._connection = await createConnection({
 			type: 'mysql',
 			url: DB_URL,
+			migrationsRun: true,
+			entities: ['src/models/**/entity.ts'],
+			migrations: ['./migrations/*.ts'],
 		});
 	};
 }
