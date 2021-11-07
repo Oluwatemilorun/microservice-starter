@@ -1,0 +1,40 @@
+definitions:
+  getUsers: &getUsers
+    description: Get all supported users
+    operationId: getUsers
+    responses:
+      '200':
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      default:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+  
+  createUser: &createUser
+    description: Add a new supported user
+    operationId: createUser
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    responses:
+      '200':
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      
+      default:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
