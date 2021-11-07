@@ -7,6 +7,10 @@ import db from '@db/connection';
 import logger from '@shared/logger';
 import app from '@server';
 
+process.on('unhandledRejection', function (reason, p) {
+	logger.warn('Possibly Unhandled Rejection at: Promise ', p, ' reason: ', reason);
+});
+
 // Connect to DB
 db.init()
 	.then(() => {
