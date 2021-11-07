@@ -4,15 +4,15 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
-import createError, { HttpError } from 'http-errors';
-import express, { Request, Response, NextFunction } from 'express';
-import { SERVICE_UNAVAILABLE, NOT_FOUND } from 'http-status-codes';
+import createError from 'http-errors';
+import express from 'express';
+import { NOT_FOUND } from 'http-status-codes';
 
-import logger from '@shared/logger';
 import SetupSwagger from '@shared/swagger';
 import SetupV1Router from '@routes/v1';
 import { COOKIE_SECRET } from '@config';
 import { APP_NAME } from '@shared/constants';
+import { ErrorHandler } from '@shared/functions';
 
 // Init express
 const app = express();
@@ -54,22 +54,8 @@ app.use((req, res, next) => {
 	next(createError(NOT_FOUND));
 });
 
-// Print API errors
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-	logger.error(err.message, err);
-
-	res.status(err.status || SERVICE_UNAVAILABLE);
-	return res.send({
-		state: 'ERROR',
-		message: err.message,
-		payload: { ...err },
-	});
-});
+// handle errors
+app.use(ErrorHandler);
 
 //  TODO: Add favicon.
 
