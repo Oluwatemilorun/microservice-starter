@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import createError from 'http-errors';
 import express from 'express';
+import health from 'express-ping';
 import { NOT_FOUND } from 'http-status-codes';
 
 import SetupSwagger from '@shared/swagger';
@@ -28,6 +29,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(COOKIE_SECRET));
+app.use(health.ping('/health'));
 
 // Show routes called in console during development
 if (process.env.NODE_ENV === 'development') {

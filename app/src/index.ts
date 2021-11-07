@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import '@shared/types/modules';
 
 import { PORT } from '@config';
 import { APP_NAME } from '@shared/constants';

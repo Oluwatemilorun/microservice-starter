@@ -42,15 +42,11 @@
 			"@server": [
 				"src/server"
 			],
-			"@types": [
-				"src/types"
-			],
 		},
 		"types": [
 			"node",
 		],
 		"typeRoots": [
-			"./src/types",
 			"node_modules/@types"
 		]
 	},
